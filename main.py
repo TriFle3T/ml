@@ -31,4 +31,3 @@ if __name__ == '__main__':
             break
         temp = model_predict.predict(sentence)
         print(temp)
-        print(type(temp[-1]))
