@@ -40,11 +40,8 @@ class BERTpredict():
                   test_per.append(round((1/(1+np.exp((-1)*logit)))*100))
             
             em = pd.Series(test_per,index = [0,1,2,3,4,5,6])
-            em.sort_values().index[6]
             res = em.values.tolist()
-            res.append(em.sort_values().index[6])
-            if res[7]==6:
-                res.append(em.sort_values().index[5])
-            else:
-                res.append(em.sort_values().index[6])
+            res.append(int(em.sort_values().index[6]))
+            idx = 5 if res[7] == 6 else 6
+            res.append(int(em.sort_values().index[idx]))
             return res
