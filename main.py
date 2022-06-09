@@ -20,7 +20,7 @@ if __name__ == '__main__':
     batch_size = 64
 
     model = BERTClassifier(bertmodel,  dr_rate=0.5).to(device)
-    model.load_state_dict(torch.load('./my_path/model4.pth',map_location=device))
+    model.load_state_dict(torch.load('./my_path/model12.pth',map_location=device))
     
     model_predict = BERTpredict(model,tok,vocab,max_len,batch_size,device)
     
