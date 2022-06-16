@@ -20,9 +20,10 @@ if __name__ == '__main__':
     batch_size = 64
 
     model = BERTClassifier(bertmodel,  dr_rate=0.5).to(device)
-    model.load_state_dict(torch.load('./my_path/model12.pth',map_location=device))
+    model.load_state_dict(torch.load('./my_path/model8.pth',map_location=device))
     
     model_predict = BERTpredict(model,tok,vocab,max_len,batch_size,device)
+    emotion = {0:'행복',1:'분노',2:'혐오',3:'공포',4:'중립',5:'슬픔',6:'놀람'}
     
     while True :
         sentence = input("하고싶은 말을 입력해주세요 : ")
@@ -30,4 +31,6 @@ if __name__ == '__main__':
         if sentence == '0' :
             break
         temp = model_predict.predict(sentence)
-        print(temp)
+        for i in range(7):
+            print(emotion[i]+': '+str(temp[i])+'%')
+        print("분석 감정: "+emotion[temp[7]])
