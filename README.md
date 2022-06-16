@@ -1,4 +1,4 @@
-# ml
+# ML
 
 <!-- code_chunk_output -->
 
@@ -77,6 +77,8 @@ pip install -r requirements.txt
 
 ## Result
 
+### Accuracy
+
 |  model(data)  |   acc   | data info                                                        |
 | :-----------: | :-----: | :--------------------------------------------------------------- |
 | model1(data1) | 0.92422 | source1(기본)                                                    |
@@ -86,6 +88,8 @@ pip install -r requirements.txt
 | model5(data5) | 0.76473 | data3를 기준으로 under sampling({1:0.5,4:0.6,5:0.28}비율로)      |
 | model6(data6) | 0.63665 | data4를 기준으로 under sampling(가장 적은 수의 label을 기준으로) |
 
+### Analysis
+
 - 정확도는 model1이 가장 높지만 실제 테스트에서는 납득이 가지 않는 분석이 더러 있었습니다. raw data를 살펴보면 애초에 라벨링 과정에서 납득이 가지 않는 데이터가 많이 포함되어 있는 것을 발견할 수 있었습니다.
 - 주어진 정보(1~5의 감정세기)에 가중치를 주어 계산하여 새로운 값을 도출하여 라벨링을 진행하였습니다.
 - 데이터 불균형이 심하여(슬픔 data가 압도적으로 많아 어떤 텍스트를 주어도 슬픔일 확률이 높음) under sampling을 하여 label간의 균형을 맞추어 주었습니다.
@@ -93,6 +97,31 @@ pip install -r requirements.txt
 - 최종적으로 model5와 model6 중 하나를 선택해야 했는데 source2가 신뢰도가 낮다고 판단하여 학습데이터에 포함되지 않는 것이 좋다고 판단하였습니다.
 - 따라서 최종적으로 model5를 선택하였습니다.
 - (추가) model의 정확도를 높일 수 있는 방안으로는 시간이 허락한다면 학습데이터에 대한 labeling을 직접 하여 데이터의 신뢰도를 높이는 것이 될 것 입니다.
+
+### logit to percent(e.g. two classes)
+
+logit을 percent로 변환하는 식입니다. </br>
+$C_1,C_2$</br>
+$P(C_1|x)=y$</br>
+$P(C_2|x)=1-y$</br>
+
+$Choose=
+\begin{cases}
+C_1\quad if\;y>0.5\\
+C_2\quad if\;y\leq0.5
+\end{cases}$
+$⇔\frac{y}{1-y}>1$
+$⇔\log{\frac{y}{1-y}}>0$\
+$logit(y)=\log{{\frac{y}{1-y}}}=t$\
+$\quad\quad\quad\;\;⇒\frac{y}{1-y}=\exp(t)$\
+$\quad\quad\quad\;\;⇒\frac{1-y}{y}=\frac{1}{\exp(t)}$\
+$\quad\quad\quad\;\;⇒\frac{1}{y}=\frac{1+\exp(t)}{\exp(t)}$\
+$\quad\quad\quad\;\;⇒y=\frac{1}{1+\exp(-t)}$\
+$∴\;y=\frac{1}{1+\exp(-t)}$
+
+### In App
+
+![In App](./in_app.png)
 
 ---
 
