@@ -101,23 +101,7 @@ pip install -r requirements.txt
 ### logit to percent(e.g. two classes)
 
 logit을 percent로 변환하는 식입니다. </br>
-$C_1,C_2$</br>
-$P(C_1|x)=y$</br>
-$P(C_2|x)=1-y$</br>
-
-$Choose=
-\begin{cases}
-C_1\quad if\;y>0.5\\
-C_2\quad if\;y\leq0.5
-\end{cases}$
-$⇔\frac{y}{1-y}>1$
-$⇔\log{\frac{y}{1-y}}>0$\
-$logit(y)=\log{{\frac{y}{1-y}}}=t$\
-$\quad\quad\quad\;\;⇒\frac{y}{1-y}=\exp(t)$\
-$\quad\quad\quad\;\;⇒\frac{1-y}{y}=\frac{1}{\exp(t)}$\
-$\quad\quad\quad\;\;⇒\frac{1}{y}=\frac{1+\exp(t)}{\exp(t)}$\
-$\quad\quad\quad\;\;⇒y=\frac{1}{1+\exp(-t)}$\
-$∴\;y=\frac{1}{1+\exp(-t)}$
+![In App](./logit_percent.png)
 
 ### In App
 
